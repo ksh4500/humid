@@ -24,15 +24,13 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     String TAG;
-    MyHelper helper;/*데이터 베이스 구축*/
-    static SQLiteDatabase db;/*데이터 베이스 쿼리문 제어*/
     TextView[] h,state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //initDB();
+
 
 
         //갯수 추가를 위해서는
@@ -197,15 +195,6 @@ public class MainActivity extends AppCompatActivity {
         return dataset;
     }
 
-    public void initDB(){//sqlite초기화
-        helper=new MyHelper(this,"iot.sqlite",null,1);
-        db=helper.getWritableDatabase();
-        Cursor cursor=db.rawQuery("select * from humidair",null);
-        while (cursor.moveToNext()){
-            int temp=cursor.getInt(cursor.getColumnIndex("temp"));
-            float weight=cursor.getFloat(cursor.getColumnIndex("weight"));
-            Log.d(TAG,"temp"+temp+"weight"+weight);
-        }
-    }
+
 
 }

@@ -10,6 +10,7 @@ import java.io.InputStream;
 
 import jxl.Sheet;
 import jxl.Workbook;
+import jxl.read.biff.WorkbookParser;
 
 /**
  * 안드로이드에서는 sqlite데이터베이스의 위치가 이미 data/data/앱페키지/databases로 정해져 있기 때문에
@@ -52,6 +53,7 @@ public class MyHelper extends SQLiteOpenHelper {
         Log.d(TAG,"regist");
         try{
             AssetManager am=context.getAssets();
+            Log.d(TAG,am.toString());
             InputStream is=am.open("chartForHumidAir.xls");
             Log.d(TAG,"is");
             Workbook wb=Workbook.getWorkbook(is);
