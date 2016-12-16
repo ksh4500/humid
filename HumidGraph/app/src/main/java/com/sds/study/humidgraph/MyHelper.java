@@ -40,7 +40,7 @@ public class MyHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(sql.toString());
         Log.d(TAG,"Database 구축");
         sql.setLength(0);
-        sql.append("create table humidair(");
+        sql.append("create table IF NOT EXISTS humidair(");
         sql.append("temp integer,");
         sql.append("weight real");
         sql.append(");");

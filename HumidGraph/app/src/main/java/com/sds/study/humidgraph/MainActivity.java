@@ -1,8 +1,10 @@
 package com.sds.study.humidgraph;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -198,6 +200,12 @@ public class MainActivity extends AppCompatActivity {
     public void initDB(){//sqlite초기화
         helper=new MyHelper(this,"iot.sqlite",null,1);
         db=helper.getWritableDatabase();
+        Cursor cursor=db.rawQuery("select * from humidair",null);
+        while (cursor.moveToNext()){
+            int temp=cursor.getInt(cursor.getColumnIndex("temp"));
+            float weight=cursor.getFloat(cursor.getColumnIndex("weight"));
+            Log.d(TAG,"temp"+temp+"weight"+weight);
+        }
     }
 
 }
