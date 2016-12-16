@@ -39,21 +39,25 @@ public class MyHelper extends SQLiteOpenHelper {
         sql.append(");");
         sqLiteDatabase.execSQL(sql.toString());
         Log.d(TAG,"Database 구축");
-        sql.setLength(0);
+        /*sql.setLength(0);
         sql.append("create table IF NOT EXISTS humidair(");
         sql.append("temp integer,");
         sql.append("weight real");
         sql.append(");");
-        sqLiteDatabase.execSQL(sql.toString());
+        sqLiteDatabase.execSQL(sql.toString());*/
         regist(sqLiteDatabase);
     }
     public void regist(SQLiteDatabase db){
         /*이앱이 보유한 sqlite파일에 인서트 하면 된다.*/
+        Log.d(TAG,"regist");
         try{
             AssetManager am=context.getAssets();
             InputStream is=am.open("chartForHumidAir.xls");
+            Log.d(TAG,"is");
             Workbook wb=Workbook.getWorkbook(is);
+            Log.d(TAG,"wb");
             Sheet sheet=wb.getSheet(0);
+            Log.d(TAG,"sheet");
             int row= sheet.getRows();
             String data="";
             StringBuffer sql=new StringBuffer();
