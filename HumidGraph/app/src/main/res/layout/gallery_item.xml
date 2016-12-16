@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <TextView
+        android:text="첫번째 옷걸이"
+        android:id="@+id/gtext01"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_weight="2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:layout_weight="3"
+        android:adjustViewBounds="true"
+        android:id="@+id/gimg01"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="#f4efef"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:src="@drawable/g1"/>
+
+</LinearLayout>
