@@ -7,6 +7,39 @@
     android:orientation="vertical"
     tools:context="com.sds.study.humidgraph.GalleryScroll">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#7300ff">
+
+        <ImageView
+            android:id="@+id/refresh"
+            android:src="@drawable/refresh"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_weight="7"
+            android:layout_width="0dp"
+            android:textSize="20dp"
+            android:layout_height="wrap_content"
+            android:textColor="#f0efeb"
+            android:text="옷거리 아두이노 습도측정"/>
+
+        <ImageView
+            android:id="@+id/bluetooth"
+            android:src="@drawable/bluetooth"
+            android:textColor="#f0efeb"
+            android:layout_gravity="center_vertical"
+            android:text="확인"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="25dp" />
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/img01"

@@ -61,6 +61,15 @@ public class GalleryScroll extends AppCompatActivity {
                 iv.setImageResource(img[position]);
             }
         });
+        ImageView bluetooth=(ImageView)findViewById(R.id.bluetooth);
 
+        bluetooth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"블루투스 리스트 화면으로 이동",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+
 }
