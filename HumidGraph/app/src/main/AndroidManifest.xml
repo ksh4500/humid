@@ -18,9 +18,9 @@
 
         </activity>
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"/>
+        <service android:name=".NotificationService"/>
 
-        </activity>
     </application>
 
 </manifest>
