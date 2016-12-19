@@ -1,8 +1,18 @@
 package com.sds.study.humidgraph;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,15 +32,13 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     String TAG;
-    MyHelper helper;/*데이터 베이스 구축*/
-    static SQLiteDatabase db;/*데이터 베이스 쿼리문 제어*/
     TextView[] h,state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initDB();
+
 
 
         //갯수 추가를 위해서는
@@ -61,10 +69,15 @@ public class MainActivity extends AppCompatActivity {
                 state[i].setText("조금 건조");
             }else if(data[i-1]>=0&&data[i-1]<20){
                 state[i].setText("완전 건조");
+
+                /*yt건조완료 알림*/
+                Intent intent=new Intent(this,NotificationService.class);
+                startService(intent);
+
+                /*yt환풍기 작동 정지(추가작성하기)*/
+
             }
         }
-
-
 
 
           /*  h[i].setText(Integer.toString(data[0]));
@@ -74,9 +87,6 @@ public class MainActivity extends AppCompatActivity {
             h5.setText(Integer.toString(data[4]));
             h6.setText(Integer.toString(data[5]));
             h7.setText(Integer.toString(data[6]));*/
-
-
-
 
 
         //그래프 생성
@@ -172,6 +182,8 @@ public class MainActivity extends AppCompatActivity {
 
     //데이터들
     private XYMultipleSeriesDataset getDataset( int[] data ) {
+
+
         XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
 
 
@@ -195,9 +207,6 @@ public class MainActivity extends AppCompatActivity {
         return dataset;
     }
 
-    public void initDB(){//sqlite초기화
-        helper=new MyHelper(this,"iot.sqlite",null,1);
-        db=helper.getWritableDatabase();
-    }
+
 
 }
