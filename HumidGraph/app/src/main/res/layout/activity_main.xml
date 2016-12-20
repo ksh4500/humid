@@ -1,411 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.sds.study.humidgraph.DetailActivity">
-
-
-    <LinearLayout
-        android:id="@+id/chart"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-
-        android:orientation="horizontal">
-
-    </LinearLayout>
-
-
-    <ScrollView
-        android:layout_weight="1.5"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#FFDD"
-            android:stretchColumns="*"
-            android:layout_weight="2">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="3dp"/>
-
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#ccc9ce"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="경과시간"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#ccc9ce"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="습도"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#ccc9ce"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="기타"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="2시간"
-                    />
-                <TextView
-                    android:id="@+id/h1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="60"
-                    />
-                <TextView
-                    android:id="@+id/state1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="많이 젖음"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="4시간"
-                    />
-                <TextView
-                    android:id="@+id/h2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="40"
-                    />
-                <TextView
-                    android:id="@+id/state2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="조금 젖음"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="6시간"
-                    />
-                <TextView
-                    android:id="@+id/h3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="25"
-                    />
-                <TextView
-                    android:id="@+id/state3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="조금 젖음"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="8시간"
-                    />
-
-                <TextView
-                    android:id="@+id/h4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="20"
-                    />
-                <TextView
-                    android:id="@+id/state4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="조금 건조"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="8시간"
-                    />
-
-                <TextView
-                    android:id="@+id/h5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="20"
-                    />
-                <TextView
-                    android:id="@+id/state5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="조금 건조"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="10시간"
-                    />
-                <TextView
-                    android:id="@+id/h6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="15"
-                    />
-                <TextView
-                    android:id="@+id/state6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="조금 건조"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="12시간"
-                    />
-                <TextView
-                    android:id="@+id/h7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="10"
-                    />
-                <TextView
-                    android:id="@+id/state7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="건조"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="14시간"
-                    />
-                <TextView
-                    android:id="@+id/h8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="0"
-                    />
-                <TextView
-                    android:id="@+id/state8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="#f7f5f9"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="완전 건조"
-                    />
-
-            </TableRow>
-
-
-        </TableLayout>
-    </ScrollView>
+    tools:context="com.sds.study.humidgraph.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5">
+        android:layout_height="40dp"
+        android:background="#7300ff">
+
+        <ImageView
+            android:id="@+id/refresh"
+            android:src="@drawable/refresh"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            />
 
         <TextView
-
-            android:gravity="center"
-            android:layout_weight="1"
-            android:text="건조 완료 예상시간  :  "
-            android:textSize="20dp"
-            android:layout_gravity="center"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="7"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
-
-        <TextView
-
-            android:layout_weight="1"
-            android:text=" 2시간 "
             android:textSize="20dp"
-            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:textColor="#f0efeb"
+            android:text="옷거리 아두이노 습도측정"/>
+
+        <ImageView
+            android:id="@+id/bluetooth"
+            android:src="@drawable/bluetooth"
+            android:textColor="#f0efeb"
+            android:layout_gravity="center_vertical"
+            android:text="확인"
+            android:layout_weight="2"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="25dp" />
 
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/img01"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="7"
+        android:adjustViewBounds="true"
+        android:src="@drawable/t1" />
 
+    <Gallery
+        android:id="@+id/gallery01"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="1"
+        android:background="#aaa"></Gallery>
 </LinearLayout>

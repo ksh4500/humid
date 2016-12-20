@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.gallery_main);
+        setContentView(R.layout.activity_main);
         initDB();
 
         //drawable 있는 이미지를 galleryList에 추가하는 작업
@@ -74,6 +74,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(),"블루투스 리스트 화면으로 이동",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        ImageView weather=(ImageView)findViewById(R.id.weather);
+
+        weather.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"날씨 리스트 화면으로 이동",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(getApplicationContext(),Weather.class);
+                startActivity(intent);
             }
         });
     }

@@ -1,34 +1,18 @@
 package com.sds.study.humidgraph;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
-import org.achartengine.chart.BarChart;
 import org.achartengine.chart.PointStyle;
-import org.achartengine.model.SeriesSelection;
 import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
-
-import java.util.Random;
 
 public class DetailActivity extends AppCompatActivity {
     String TAG;
@@ -37,7 +21,7 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_detail);
 
         //갯수 추가를 위해서는
         //dataset에 있는 xySeries의 수와 renderer에 있는 xySeriesRender의 수가 맞아야함
