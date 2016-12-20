@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.gallery_main);
+        setContentView(R.layout.activity_main);
         initDB();
 
         //drawable 있는 이미지를 galleryList에 추가하는 작업
