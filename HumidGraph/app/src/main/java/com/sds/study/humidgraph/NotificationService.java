@@ -78,17 +78,17 @@ public class NotificationService extends Service {
         //final int time = intent.getIntExtra("time", 0);
         //Toast.makeText(this, "안녕~ 난 서비스 : "+time, 0).show();
         //handler 통한 Thread 이용
-        new Thread(new Runnable() {
+        mHandler.sendEmptyMessage(0);
+        /*new Thread(new Runnable() {
             @Override
             public void run() {
                 mRunning = true;
                 while(mRunning) {
                     //SystemClock.sleep(1000);
-                    mHandler.sendEmptyMessage(0);
                     mRunning = false;
                 }
             }
-        }).start();
+        }).start();*/
 
         return START_STICKY_COMPATIBILITY;
     }
