@@ -74,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(),"블루투스 리스트 화면으로 이동",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(getApplicationContext(),Bluetooth_MainActivity.class);
+                startActivity(intent);
             }
         });
 
