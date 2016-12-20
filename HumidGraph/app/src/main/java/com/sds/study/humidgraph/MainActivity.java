@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        TAG=getClass().getName();
         initDB();
 
         //drawable 있는 이미지를 galleryList에 추가하는 작업
@@ -74,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(),"블루투스 리스트 화면으로 이동",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(getApplicationContext(),Bluetooth_MainActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -92,9 +95,5 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        ActivityCompat.finishAffinity(this);
-        System.runFinalizersOnExit(true);
-        System.exit(0);
-
     }
 }
