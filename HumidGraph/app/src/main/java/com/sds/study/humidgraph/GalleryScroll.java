@@ -33,6 +33,7 @@ public class GalleryScroll extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gallery_main);
         initDB();
+        
         //drawable 있는 이미지를 galleryList에 추가하는 작업
 
         adapter = new GalleryAdapter(this);
