@@ -10,15 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="#7300ff">
-
-        <ImageView
-            android:id="@+id/refresh"
-            android:src="@drawable/refresh"
-            android:layout_weight="2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            />
+        android:background="#fbcb38">
 
         <TextView
             android:layout_gravity="center_vertical"
@@ -27,7 +19,17 @@
             android:textSize="20dp"
             android:layout_height="wrap_content"
             android:textColor="#f0efeb"
-            android:text="옷거리 아두이노 습도측정"/>
+            android:text="옷걸이"/>
+
+        <ImageView
+            android:id="@+id/weather"
+            android:src="@drawable/weatherbutton"
+            android:textColor="#f0efeb"
+            android:layout_gravity="center_vertical"
+            android:text="확인"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="25dp" />
 
         <ImageView
             android:id="@+id/bluetooth"
