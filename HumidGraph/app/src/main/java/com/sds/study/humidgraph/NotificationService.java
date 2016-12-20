@@ -50,10 +50,11 @@ public class NotificationService extends Service {
             builder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
             builder.setAutoCancel(true);
 
-            Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent resultIntent = new Intent(getApplicationContext(), DetailActivity.class);
             TaskStackBuilder stackBuilder = TaskStackBuilder.create(NotificationService.this);
 
-            stackBuilder.addParentStack(MainActivity.class);
+            stackBuilder.addParentStack(DetailActivity.class);
+
 
             stackBuilder.addNextIntent(resultIntent);
             PendingIntent resultPendingIntent =
