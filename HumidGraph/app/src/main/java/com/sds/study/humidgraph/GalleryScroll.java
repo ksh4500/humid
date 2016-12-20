@@ -18,7 +18,7 @@ public class GalleryScroll extends AppCompatActivity {
     static SQLiteDatabase db;/*데이터 베이스 쿼리문 제어*/
     GalleryAdapter adapter;
 
-    int img[]={
+    int img[] = {
             R.drawable.t1,
             R.drawable.t2,
             R.drawable.t3,
@@ -33,58 +33,61 @@ public class GalleryScroll extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gallery_main);
         initDB();
-        
+
         //drawable 있는 이미지를 galleryList에 추가하는 작업
 
         adapter = new GalleryAdapter(this);
 
 
-        for(int i = 1; i<6; i++){
-            adapter.addItem(getResources().getIdentifier("g"+i, "drawable",this.getPackageName()));
+        for (int i = 1; i < 6; i++) {
+            adapter.addItem(getResources().getIdentifier("g" + i, "drawable", this.getPackageName()));
         }
 
-        final ImageView iv = (ImageView)findViewById(R.id.img01);
+        final ImageView iv = (ImageView) findViewById(R.id.img01);
 
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(getApplicationContext(),"눌렀어?",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "눌렀어?", Toast.LENGTH_SHORT).show();
 
-                Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
         });
 
-        Gallery gallery = (Gallery)findViewById(R.id.gallery01);
+        Gallery gallery = (Gallery) findViewById(R.id.gallery01);
 
         gallery.setAdapter(adapter);
 
-        gallery.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id){
-               // Integer galleryItem = adapter.getGalleryItem(position);
-              //  iv.setImageResource(galleryItem);
+        gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                // Integer galleryItem = adapter.getGalleryItem(position);
+                //  iv.setImageResource(galleryItem);
                 iv.setImageResource(img[position]);
             }
         });
-        ImageView bluetooth=(ImageView)findViewById(R.id.bluetooth);
+        ImageView bluetooth = (ImageView) findViewById(R.id.bluetooth);
 
         bluetooth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"블루투스 리스트 화면으로 이동",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "블루투스 리스트 화면으로 이동", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(getApplicationContext(), Bluetooth_MainActivity.class);
+                startActivity(intent);
             }
         });
     }
 
-    public void initDB(){//sqlite초기화
-        helper=new MyHelper(this,"iot.sqlite",null,1);
-        db=helper.getWritableDatabase();
-        Cursor cursor=db.rawQuery("select * from humidair",null);
-        while (cursor.moveToNext()){
-            int temp=cursor.getInt(cursor.getColumnIndex("temp"));
-            float weight=cursor.getFloat(cursor.getColumnIndex("weight"));
-            Log.d(TAG,"temp"+temp+"weight"+weight);
+    public void initDB() {//sqlite초기화
+        helper = new MyHelper(this, "iot.sqlite", null, 1);
+        db = helper.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from humidair", null);
+        while (cursor.moveToNext()) {
+            int temp = cursor.getInt(cursor.getColumnIndex("temp"));
+            float weight = cursor.getFloat(cursor.getColumnIndex("weight"));
+            Log.d(TAG, "temp" + temp + "weight" + weight);
         }
     }
 }
