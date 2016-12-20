@@ -89,7 +89,6 @@ public class NotificationService extends Service {
                 }
             }
         }).start();*/
-
         return START_STICKY_COMPATIBILITY;
     }
 }
