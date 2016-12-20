@@ -19,6 +19,7 @@ import android.util.Log;
  */
 
 public class NotificationService extends Service {
+    protected boolean mRunning;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -68,9 +69,7 @@ public class NotificationService extends Service {
         }
     };
 
-    protected boolean mRunning;
-
-    // 제일 중요한 메서드! (서비스 작동내용을 넣어준다.)
+     // 제일 중요한 메서드! (서비스 작동내용을 넣어준다.)
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d("service","onStartCommand 실행");
