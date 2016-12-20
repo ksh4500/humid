@@ -71,7 +71,6 @@ public class DetailActivity extends AppCompatActivity {
                 /*yt건조완료 알림*/
                 Intent intent=new Intent(this,NotificationService.class);
                 startService(intent);
-
                 /*yt환풍기 작동 정지(추가작성하기)*/
 
             }
