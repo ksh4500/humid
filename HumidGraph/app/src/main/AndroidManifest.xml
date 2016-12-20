@@ -14,20 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-<<<<<<< HEAD
+
         <activity android:name=".MainActivity">
             <intent-filter>
-        =======
+                <action android:name="android.intent.action.MAIN" />
 
-        <<<<<<< HEAD
-        <activity android:name=".DetailActivity"/>
-=======
-        <activity android:name=".Bluetooth_MainActivity">
-
-
+                <category android:name="android.intent.category.LAUNCHER" />
+           </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"/>
->>>>>>> 18d3d6dca5b2d5b24d8298a02cd6763394ef89ec
+        <activity android:name=".DetailActivity"/>
+        <activity android:name=".Bluetooth_MainActivity"/>
         <service android:name=".NotificationService"/>
 
     </application>
