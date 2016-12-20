@@ -40,12 +40,18 @@ public class MyHelper extends SQLiteOpenHelper {
         sql.append(");");
         sqLiteDatabase.execSQL(sql.toString());
         Log.d(TAG,"Database 구축");
-        /*sql.setLength(0);
-        sql.append("create table IF NOT EXISTS humidair(");
-        sql.append("temp integer,");
-        sql.append("weight real");
+        sql.setLength(0);
+        sql.append("create table datasheet(");
+        sql.append("MacAddress varchar(50),");
+        sql.append("humidity1 integer,");
+        sql.append("temperature1 integer,");
+        sql.append("humidity2 integer,");
+        sql.append("temperature2 integer,");
+        sql.append("humidity3 integer,");
+        sql.append("temperature3 integer,");
+        sql.append("regdate varchar(20)");
         sql.append(");");
-        sqLiteDatabase.execSQL(sql.toString());*/
+        sqLiteDatabase.execSQL(sql.toString());
         regist(sqLiteDatabase);
     }
     public void regist(SQLiteDatabase db){

@@ -54,6 +54,7 @@ public class NotificationService extends Service {
 
             stackBuilder.addParentStack(DetailActivity.class);
 
+
             stackBuilder.addNextIntent(resultIntent);
             PendingIntent resultPendingIntent =
                     stackBuilder.getPendingIntent(
