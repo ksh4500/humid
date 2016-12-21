@@ -58,7 +58,7 @@ public class GalleryAdapter extends BaseAdapter {
         TextView txtview = (TextView) convertView.findViewById(R.id.gtext01);
 
         imageview.setImageResource(galleryList.get(position));
-        txtview.setText(position+1+" 번째 옷걸이");
+        txtview.setText(position+1+"  HANGER");
 
         return convertView;
     }
