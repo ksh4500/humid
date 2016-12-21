@@ -27,12 +27,12 @@ public class DetailActivity extends AppCompatActivity {
         //dataset에 있는 xySeries의 수와 renderer에 있는 xySeriesRender의 수가 맞아야함
 
         //int[] data = {25,30,35,23,24,35,32,30,27,38,24};
-        final int[] data = {40,35,27,23,22,20,15,10,5,3,1};
+        final int[] data = {40,35,27,23,22,20};
 
-        h=new TextView[9];
-        state=new TextView[9];
+        h=new TextView[data.length];
+        state=new TextView[data.length];
 
-        for(int i=1;i<9;i++) {
+        for(int i=1;i<data.length;i++) {
             h[i] = (TextView) findViewById(getResources().getIdentifier("h"+i,"id",this.getPackageName()));
             state[i] = (TextView) findViewById(getResources().getIdentifier("state"+i,"id",this.getPackageName()));
            /* TextView h2 = (TextView) findViewById(R.id.h2);
@@ -170,7 +170,7 @@ public class DetailActivity extends AppCompatActivity {
 
         XYSeries series = new XYSeries("습도 변화량");
         for (int i = 0; i < data.length; i++ ) {
-            series.add(i*2, data[i] );
+            series.add(i/12, data[i] );
         }
 
         /*
