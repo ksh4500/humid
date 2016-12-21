@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.achartengine.ChartFactory;
@@ -17,12 +18,12 @@ import org.achartengine.renderer.XYSeriesRenderer;
 public class DetailActivity extends AppCompatActivity {
     String TAG;
     TextView[] h,state;
-
+    ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
+        listView=(ListView)findViewById(R.id.listView);
         //갯수 추가를 위해서는
         //dataset에 있는 xySeries의 수와 renderer에 있는 xySeriesRender의 수가 맞아야함
 
@@ -35,12 +36,6 @@ public class DetailActivity extends AppCompatActivity {
         for(int i=1;i<9;i++) {
             h[i] = (TextView) findViewById(getResources().getIdentifier("h"+i,"id",this.getPackageName()));
             state[i] = (TextView) findViewById(getResources().getIdentifier("state"+i,"id",this.getPackageName()));
-           /* TextView h2 = (TextView) findViewById(R.id.h2);
-            TextView h3 = (TextView) findViewById(R.id.h3);
-            TextView h4 = (TextView) findViewById(R.id.h4);
-            TextView h5 = (TextView) findViewById(R.id.h5);
-            TextView h6 = (TextView) findViewById(R.id.h6);
-            TextView h7 = (TextView) findViewById(R.id.h7);*/
             h[i].setText(Integer.toString(data[i-1]));
 
             if(data[i-1]>=40){
@@ -51,25 +46,12 @@ public class DetailActivity extends AppCompatActivity {
                 state[i].setText("조금 건조");
             }else if(data[i-1]>=0&&data[i-1]<20){
                 state[i].setText("완전 건조");
-
                 /*yt건조완료 알림*/
                 Intent intent=new Intent(this,NotificationService.class);
                 startService(intent);
-
                 /*yt환풍기 작동 정지(추가작성하기)*/
-
             }
         }
-
-
-          /*  h[i].setText(Integer.toString(data[0]));
-            h2.setText(Integer.toString(data[1]));
-            h3.setText(Integer.toString(data[2]));
-            h4.setText(Integer.toString(data[3]));
-            h5.setText(Integer.toString(data[4]));
-            h6.setText(Integer.toString(data[5]));
-            h7.setText(Integer.toString(data[6]));*/
-
 
         //그래프 생성
         final GraphicalView chart = ChartFactory.getLineChartView(this, getDataset(data), getRenderer());
@@ -78,20 +60,13 @@ public class DetailActivity extends AppCompatActivity {
         layout.addView(chart);
 
     }
-
-    public DetailActivity() {
-
-
-    }
-
     //그래프 설정 모음
     // http://www.programkr.com/blog/MQDN0ADMwYT3.html ( 그래프 설정 속성 한글로 써져있는 사이트 )
     private void setChartSettings(XYMultipleSeriesRenderer renderer) {
-        //타이틀, x,y축 글자
+        //타이틀, x,y축 글자,xy축 범위
         renderer.setChartTitle("습도 변화 그래프");
         renderer.setXTitle("시간");
         renderer.setYTitle("습도");
-
         renderer.setRange(new double[] {0,6,-70,40});
 
 
@@ -135,7 +110,6 @@ public class DetailActivity extends AppCompatActivity {
         renderer.setFitLegend(true);
         //간격에 격자 보이기
         renderer.setShowGrid(true);
-
     }
 
     //선 그리기
@@ -149,46 +123,47 @@ public class DetailActivity extends AppCompatActivity {
         r.setFillPoints(true);             //점 체우기 여부
         renderer.addSeriesRenderer(r);
         //----------------------------
-
         /*
         * 다른 그래프를 추가하고 싶으면
         * XYSeriesRenderer 추가로 생성한 후
         *  renderer.addSeriesRenderer(r) 해준다 (Data도 있어야함)
-        *
         */
-
-
         setChartSettings(renderer);
         return renderer;
     }
 
     //데이터들
     private XYMultipleSeriesDataset getDataset( int[] data ) {
-
-
         XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
-
-
         XYSeries series = new XYSeries("습도 변화량");
         for (int i = 0; i < data.length; i++ ) {
             series.add(i*2, data[i] );
         }
-
         /*
-        *
         * 다른 그래프를 추가하고 싶으면
         * XYSeries를 추가로 생성한 후
         * dataset.addSeries(series) 해준다 (renderer도 있어야함)
         *
         */
-
-
         dataset.addSeries(series);
-
-
         return dataset;
     }
-
-
-
+    public void reset(int data[]){
+        for(int i=1;i<9;i++) {
+            h[i].setText(Integer.toString(data[i-1]));
+            if(data[i-1]>=40){
+                state[i].setText("많이 젖음");
+            }else if(data[i-1]>=25&&data[i-1]<40){
+                state[i].setText("조금 젖음");
+            }else if(data[i-1]>=20&&data[i-1]<25){
+                state[i].setText("조금 건조");
+            }else if(data[i-1]>=0&&data[i-1]<20){
+                state[i].setText("완전 건조");
+                /*yt건조완료 알림*/
+                Intent intent=new Intent(this,NotificationService.class);
+                startService(intent);
+                /*yt환풍기 작동 정지(추가작성하기)*/
+            }
+        }
+    }
 }
