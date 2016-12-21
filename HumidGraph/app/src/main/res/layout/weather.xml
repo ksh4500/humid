@@ -3,17 +3,94 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
+    <!--<Button
         android:id="@+id/weatherbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onClick"
-        android:text="click"/>
+        android:text="click"/>-->
 
     <TextView
+        android:id="@+id/w_time"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="[15H~18H]"
+        android:textSize="35sp"
+        android:textColor="#728bed"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:id="@+id/w_weather"
+        android:src="@drawable/w_sun"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:padding="10dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/w_temp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/w_temp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="00도"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"/>
+
+        <ImageView
+            android:padding="10dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/w_humid"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/w_humid"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="00%"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/w_wind"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/w_wind"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="00.0m/s"
+            android:layout_weight="1.4"
+            android:gravity="center"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:textColor="#f9a32b"
+        android:padding="10dp"
+        android:text="날씨"
         android:id="@+id/weathertextview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text=""/>
+        android:layout_height="0dp"
+        android:textStyle="bold"
+        android:layout_weight="5"/>
 
 </LinearLayout>
