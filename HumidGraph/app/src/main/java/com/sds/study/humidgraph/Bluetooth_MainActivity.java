@@ -110,22 +110,24 @@ public class Bluetooth_MainActivity extends AppCompatActivity implements Adapter
                 tdata[1]=Integer.parseInt(datas[3]);
                 hdata[2]=Integer.parseInt(datas[4]);
                 tdata[2]=Integer.parseInt(datas[5]);
+
                 String[] weight=new String[3];
                 for(int i=0;i<tdata.length;i++) {
                     Cursor cursor=MainActivity.db.rawQuery("select * from humidair where temp=?",new String[]{Integer.toString(tdata[i])});
                     if(cursor.moveToNext()){
-                        weight[i]=Double.toString(cursor.getFloat(cursor.getColumnIndex("weight"))*hdata[i]);
+                        weight[i]=Double.toString(cursor.getFloat(cursor.getColumnIndex("weight"))*hdata[i]);//상대습도->절대습도
                     }
                 }
                 String time = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date(System.currentTimeMillis()));
+
                 StringBuffer sql = new StringBuffer();
-                sql.append("insert into datasheet(MacAddress,humidity1,temperature1,humidity2,temperature2,humidity3,temperature3,regdate) ");
-                sql.append("values(?,?,?,?,?,?,?,?)");
+                sql.append("insert into datasheet(MacAddress,humidity1,temperature1,regdate) ");
+                sql.append("values(?,?,?,?)");
+
                 MainActivity.db.execSQL(sql.toString(), new String[]{mac,
                         weight[0], Integer.toString(tdata[0]),
-                        weight[1], Integer.toString(tdata[1]),
-                        weight[2], Integer.toString(tdata[2]),
                         time});
+
                 Log.d(TAG,"입력성공");
               /*
                 Cursor cursor=db.rawQuery("select * from datasheet",null);

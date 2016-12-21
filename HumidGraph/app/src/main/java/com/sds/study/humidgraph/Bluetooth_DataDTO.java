@@ -7,21 +7,12 @@ package com.sds.study.humidgraph;
 
 public class Bluetooth_DataDTO {
     private String MacAddress;
-    private int humidity1;
+    private Double humidity1;
     private int temperature1;
-    private int humidity2;
+    private Double humidity2;
     private int temperature2;
-    private int humidity3;
+    private Double humidity3;
     private int temperature3;
-
-    public String getRegdate() {
-        return regdate;
-    }
-
-    public void setRegdate(String regdate) {
-        this.regdate = regdate;
-    }
-
     private String regdate;
 
     public String getMacAddress() {
@@ -32,11 +23,11 @@ public class Bluetooth_DataDTO {
         MacAddress = macAddress;
     }
 
-    public int getHumidity1() {
+    public Double getHumidity1() {
         return humidity1;
     }
 
-    public void setHumidity1(int humidity1) {
+    public void setHumidity1(Double humidity1) {
         this.humidity1 = humidity1;
     }
 
@@ -48,11 +39,11 @@ public class Bluetooth_DataDTO {
         this.temperature1 = temperature1;
     }
 
-    public int getHumidity2() {
+    public Double getHumidity2() {
         return humidity2;
     }
 
-    public void setHumidity2(int humidity2) {
+    public void setHumidity2(Double humidity2) {
         this.humidity2 = humidity2;
     }
 
@@ -64,11 +55,11 @@ public class Bluetooth_DataDTO {
         this.temperature2 = temperature2;
     }
 
-    public int getHumidity3() {
+    public Double getHumidity3() {
         return humidity3;
     }
 
-    public void setHumidity3(int humidity3) {
+    public void setHumidity3(Double humidity3) {
         this.humidity3 = humidity3;
     }
 
@@ -80,5 +71,11 @@ public class Bluetooth_DataDTO {
         this.temperature3 = temperature3;
     }
 
+    public String getRegdate() {
+        return regdate;
+    }
 
+    public void setRegdate(String regdate) {
+        this.regdate = regdate;
+    }
 }

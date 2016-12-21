@@ -5,15 +5,15 @@ package com.sds.study.humidgraph;
  */
 
 public class ChartDTO {
-    private int progressTime;
+    private String progressTime;
     private double humidity;
     private String etc;
 
-    public int getProgressTime() {
+    public String getProgressTime() {
         return progressTime;
     }
 
-    public void setProgressTime(int progressTime) {
+    public void setProgressTime(String progressTime) {
         this.progressTime = progressTime;
     }
 

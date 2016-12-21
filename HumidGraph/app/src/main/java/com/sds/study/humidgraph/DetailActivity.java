@@ -1,5 +1,6 @@
 package com.sds.study.humidgraph;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,10 +16,16 @@ import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DetailActivity extends AppCompatActivity {
     String TAG;
-    TextView[] h,state;
+
     ListView listView;
+    ChartListAdapter chartListAdapter;
+    ArrayList<Bluetooth_DataDTO> list= new ArrayList<Bluetooth_DataDTO>();
+    ArrayList<ChartDTO> chartList=new ArrayList<ChartDTO>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,18 +33,40 @@ public class DetailActivity extends AppCompatActivity {
         listView=(ListView)findViewById(R.id.listView);
         //갯수 추가를 위해서는
         //dataset에 있는 xySeries의 수와 renderer에 있는 xySeriesRender의 수가 맞아야함
+/*yt시작*/
+        Cursor cursor=MainActivity.db.rawQuery("select * from datasheet",null);
+         /*기존 arraylist 모두 삭제*/
+        list.removeAll(list);
+        while (cursor.moveToNext()){
+            /*int i=0;*/
+            double hum1=cursor.getDouble(cursor.getColumnIndex("humidity1"));
+            String time=cursor.getString(cursor.getColumnIndex("regdate"));
+            Bluetooth_DataDTO dto=new Bluetooth_DataDTO();
+            dto.setHumidity1(hum1);
+            dto.setRegdate(time);
+            list.add(dto);
+        }
+        for(int i=0;i<list.size();i++){
+            Bluetooth_DataDTO dto=list.get(i);
+            ChartDTO chartDTO=new ChartDTO();
+            chartDTO.setHumidity(dto.getHumidity1());
+            chartDTO.setProgressTime(dto.getRegdate());
+            if(dto.getHumidity1()>=40){
+                chartDTO.setEtc("많이 젖음");
+            }else if(dto.getHumidity1()>=25&&dto.getHumidity1()<40){
+                chartDTO.setEtc("조금 젖음");
+            }else if(dto.getHumidity1()>=20&&dto.getHumidity1()<25){
+                chartDTO.setEtc("조금 건조");
+            }else if(dto.getHumidity1()>=0&&dto.getHumidity1()<20) {
+                chartDTO.setEtc("완전 건조");
+                Intent intent=new Intent(this,NotificationService.class);
+                startService(intent);
+            }
+            chartList.add(chartDTO);
+        }
 
-        //int[] data = {25,30,35,23,24,35,32,30,27,38,24};
-        final int[] data = {40,35,27,23,22,20,15,10,5,3,1};
-
-        h=new TextView[9];
-        state=new TextView[9];
-
-        for(int i=1;i<9;i++) {
-            h[i] = (TextView) findViewById(getResources().getIdentifier("h"+i,"id",this.getPackageName()));
-            state[i] = (TextView) findViewById(getResources().getIdentifier("state"+i,"id",this.getPackageName()));
-            h[i].setText(Integer.toString(data[i-1]));
-
+        /*yt끝*/
+        /*
             if(data[i-1]>=40){
                 state[i].setText("많이 젖음");
             }else if(data[i-1]>=25&&data[i-1]<40){
@@ -47,18 +76,15 @@ public class DetailActivity extends AppCompatActivity {
             }else if(data[i-1]>=0&&data[i-1]<20){
                 state[i].setText("완전 건조");
                 /*yt건조완료 알림*/
-                Intent intent=new Intent(this,NotificationService.class);
-                startService(intent);
-                /*yt환풍기 작동 정지(추가작성하기)*/
-            }
-        }
-
+              //  intent intent=new Intent(this,NotificationService.class);
+                //startService(intent);
         //그래프 생성
-        final GraphicalView chart = ChartFactory.getLineChartView(this, getDataset(data), getRenderer());
+        final GraphicalView chart = ChartFactory.getLineChartView(this, getDataset(list), getRenderer());
         //레이아웃에 추가
         LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
         layout.addView(chart);
-
+        chartListAdapter=new ChartListAdapter(this);
+        listView.setAdapter(chartListAdapter);
     }
     //그래프 설정 모음
     // http://www.programkr.com/blog/MQDN0ADMwYT3.html ( 그래프 설정 속성 한글로 써져있는 사이트 )
@@ -68,13 +94,10 @@ public class DetailActivity extends AppCompatActivity {
         renderer.setXTitle("시간");
         renderer.setYTitle("습도");
         renderer.setRange(new double[] {0,6,-70,40});
-
-
         //background
         renderer.setApplyBackgroundColor(true);      //변경 가능여부
         renderer.setBackgroundColor(Color.WHITE);    //그래프 부분 색
         renderer.setMarginsColor(Color.WHITE);       //그래프 바깥 부분 색(margin)
-
         //글자크기
         renderer.setAxisTitleTextSize(30);          //x,y축 title
         renderer.setChartTitleTextSize(30);         //상단 title
@@ -82,13 +105,12 @@ public class DetailActivity extends AppCompatActivity {
         renderer.setLegendTextSize(15);             //Series 구별 글씨 크기
         renderer.setPointSize(5f);
         renderer.setMargins(new int[] { 20, 20, 50, 50 }); //상 좌 하 우 ( '하' 의 경우 setFitLegend(true)일 때에만 가능 )
-
         //색
         renderer.setAxesColor(Color.RED);       //x,y축 선 색
         renderer.setLabelsColor(Color.CYAN);    //x,y축 글자색
 
         //x,y축 표시 간격 ( 각 축의 범위에 따라 나눌 수 있는 최소치가 제한 됨 )
-        renderer.setXLabels(5);
+        renderer.setXLabels(10);
         renderer.setYLabels(5);
 
         //x축 최대 최소(화면에 보여질)
@@ -133,37 +155,19 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     //데이터들
-    private XYMultipleSeriesDataset getDataset( int[] data ) {
+    private XYMultipleSeriesDataset getDataset( List list) {
+
         XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
         XYSeries series = new XYSeries("습도 변화량");
-        for (int i = 0; i < data.length; i++ ) {
-            series.add(i*2, data[i] );
+        for (int i = 0; i < list.size(); i++) {
+            series.add(i, ((Bluetooth_DataDTO) list.get(i)).getHumidity1());
         }
         /*
         * 다른 그래프를 추가하고 싶으면
         * XYSeries를 추가로 생성한 후
         * dataset.addSeries(series) 해준다 (renderer도 있어야함)
-        *
         */
         dataset.addSeries(series);
         return dataset;
-    }
-    public void reset(int data[]){
-        for(int i=1;i<9;i++) {
-            h[i].setText(Integer.toString(data[i-1]));
-            if(data[i-1]>=40){
-                state[i].setText("많이 젖음");
-            }else if(data[i-1]>=25&&data[i-1]<40){
-                state[i].setText("조금 젖음");
-            }else if(data[i-1]>=20&&data[i-1]<25){
-                state[i].setText("조금 건조");
-            }else if(data[i-1]>=0&&data[i-1]<20){
-                state[i].setText("완전 건조");
-                /*yt건조완료 알림*/
-                Intent intent=new Intent(this,NotificationService.class);
-                startService(intent);
-                /*yt환풍기 작동 정지(추가작성하기)*/
-            }
-        }
     }
 }

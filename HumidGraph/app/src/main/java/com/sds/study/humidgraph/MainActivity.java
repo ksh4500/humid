@@ -77,19 +77,17 @@ protected void onCreate(Bundle savedInstanceState) {
             Toast.makeText(getApplicationContext(), "블루투스 리스트 화면으로 이동", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getApplicationContext(), Bluetooth_MainActivity.class);
             startActivity(intent);
+        }
+    });
 
+    ImageView weather = (ImageView) findViewById(R.id.weather);
 
-            ImageView weather = (ImageView) findViewById(R.id.weather);
-
-            weather.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(getApplicationContext(), "날씨 리스트 화면으로 이동", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getApplicationContext(), Weather.class);
-                    startActivity(intent);
-
-                }
-            });
+    weather.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(getApplicationContext(), "날씨 리스트 화면으로 이동", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), Weather.class);
+            startActivity(intent);
         }
     });
 }

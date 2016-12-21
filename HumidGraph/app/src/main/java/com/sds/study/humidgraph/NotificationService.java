@@ -19,6 +19,7 @@ import android.util.Log;
  */
 
 public class NotificationService extends Service {
+    protected boolean mRunning;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -45,7 +46,7 @@ public class NotificationService extends Service {
             builder.setTicker("Notification");
             builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.hanger));
             builder.setContentTitle("세탁물건조알리미");
-            builder.setContentText("빨래가 다 말랐습니다.\n 환풍기 가동이 중지됩니다.");
+            builder.setContentText("빨래가 다 말랐습니다.\n ");
             builder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
             builder.setAutoCancel(true);
 
@@ -69,9 +70,7 @@ public class NotificationService extends Service {
         }
     };
 
-    protected boolean mRunning;
-
-    // 제일 중요한 메서드! (서비스 작동내용을 넣어준다.)
+     // 제일 중요한 메서드! (서비스 작동내용을 넣어준다.)
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d("service","onStartCommand 실행");

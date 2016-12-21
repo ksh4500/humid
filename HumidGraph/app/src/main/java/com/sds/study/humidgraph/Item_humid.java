@@ -25,7 +25,7 @@ public class Item_humid extends LinearLayout{
         setData(dto);
     }
     public void setData(ChartDTO dto){
-        txt_progress.setText(Integer.toString(dto.getProgressTime()));
+        txt_progress.setText(dto.getProgressTime());
         txt_humid.setText(Double.toString(dto.getHumidity()));
         txt_etc.setText(dto.getEtc());
     }

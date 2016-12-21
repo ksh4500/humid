@@ -98,7 +98,7 @@
                     android:background="#f7f5f9"
                     android:gravity="center"
                     android:padding="3dp"
-                    android:text="60"
+                    android:text="-"
                     />
                 <TextView
                     android:id="@+id/state1"
@@ -109,7 +109,7 @@
                     android:background="#f7f5f9"
                     android:gravity="center"
                     android:padding="3dp"
-                    android:text="많이 젖음"
+                    android:text="-"
                     />
 
             </TableRow>
@@ -136,7 +136,7 @@
                     android:background="#f7f5f9"
                     android:gravity="center"
                     android:padding="3dp"
-                    android:text="40"
+                    android:text="-"
                     />
                 <TextView
                     android:id="@+id/state2"
@@ -147,7 +147,7 @@
                     android:background="#f7f5f9"
                     android:gravity="center"
                     android:padding="3dp"
-                    android:text="조금 젖음"
+                    android:text="-"
                     />
 
             </TableRow>
@@ -174,7 +174,7 @@
                     android:background="#f7f5f9"
                     android:gravity="center"
                     android:padding="3dp"
-                    android:text="25"
+                    android:text="-"
                     />
                 <TextView
                     android:id="@+id/state3"
@@ -185,7 +185,7 @@
                     android:background="#f7f5f9"
                     android:gravity="center"
                     android:padding="3dp"
-                    android:text="조금 젖음"
+                    android:text="-"
                     />
 
             </TableRow>
@@ -213,7 +213,7 @@
                     android:background="#f7f5f9"
                     android:gravity="center"
                     android:padding="3dp"
-                    android:text="20"
+                    android:text="-"
                     />
                 <TextView
                     android:id="@+id/state4"
@@ -224,7 +224,7 @@
                     android:background="#f7f5f9"
                     android:gravity="center"
                     android:padding="3dp"
-                    android:text="조금 건조"
+                    android:text="-"
                     />
 
             </TableRow>
@@ -252,7 +252,7 @@
                     android:background="#f7f5f9"
                     android:gravity="center"
                     android:padding="3dp"
-                    android:text="20"
+                    android:text="-"
                     />
                 <TextView
                     android:id="@+id/state5"
@@ -263,7 +263,7 @@
                     android:background="#f7f5f9"
                     android:gravity="center"
                     android:padding="3dp"
-                    android:text="조금 건조"
+                    android:text="-"
                     />
 
             </TableRow>
@@ -290,7 +290,7 @@
                     android:background="#f7f5f9"
                     android:gravity="center"
                     android:padding="3dp"
-                    android:text="15"
+                    android:text="-"
                     />
                 <TextView
                     android:id="@+id/state6"
@@ -301,7 +301,7 @@
                     android:background="#f7f5f9"
                     android:gravity="center"
                     android:padding="3dp"
-                    android:text="조금 건조"
+                    android:text="-"
                     />
 
             </TableRow>
@@ -328,7 +328,7 @@
                     android:background="#f7f5f9"
                     android:gravity="center"
                     android:padding="3dp"
-                    android:text="10"
+                    android:text="-"
                     />
                 <TextView
                     android:id="@+id/state7"
@@ -339,7 +339,7 @@
                     android:background="#f7f5f9"
                     android:gravity="center"
                     android:padding="3dp"
-                    android:text="건조"
+                    android:text="-"
                     />
 
             </TableRow>
@@ -366,7 +366,7 @@
                     android:background="#f7f5f9"
                     android:gravity="center"
                     android:padding="3dp"
-                    android:text="0"
+                    android:text="-"
                     />
                 <TextView
                     android:id="@+id/state8"
@@ -377,7 +377,7 @@
                     android:background="#f7f5f9"
                     android:gravity="center"
                     android:padding="3dp"
-                    android:text="완전 건조"
+                    android:text="-"
                     />
 
             </TableRow>
