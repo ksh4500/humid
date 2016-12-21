@@ -73,9 +73,14 @@ public class Weather extends AppCompatActivity{
             for(int i = 0; i< nodeList.getLength(); i++){
 
                 //날씨 데이터를 추출
-                s += "" +i + ": 날씨 정보: ";
+                //s += "" +i + ": 날씨 정보: ";
                 Node node = nodeList.item(i); //data엘리먼트 노드
                 Element fstElmnt = (Element) node;
+
+                NodeList hourList = fstElmnt.getElementsByTagName("hour");
+                //<wfKor>맑음</wfKor> =====> <wfKor> 태그의 첫번째 자식노드는 TextNode 이고 TextNode의 값은 맑음
+                s += "시간 = "+  hourList.item(0).getChildNodes().item(0).getNodeValue()+" ,";
+
                 NodeList nameList  = fstElmnt.getElementsByTagName("temp");
                 Element nameElement = (Element) nameList.item(0);
                 nameList = nameElement.getChildNodes();
@@ -84,7 +89,11 @@ public class Weather extends AppCompatActivity{
 
                 NodeList websiteList = fstElmnt.getElementsByTagName("wfKor");
                 //<wfKor>맑음</wfKor> =====> <wfKor> 태그의 첫번째 자식노드는 TextNode 이고 TextNode의 값은 맑음
-                s += "날씨 = "+  websiteList.item(0).getChildNodes().item(0).getNodeValue() +"\n";
+                s += "날씨 = "+  websiteList.item(0).getChildNodes().item(0).getNodeValue()+" ,";
+
+                NodeList rehList = fstElmnt.getElementsByTagName("reh");
+                //<wfKor>맑음</wfKor> =====> <wfKor> 태그의 첫번째 자식노드는 TextNode 이고 TextNode의 값은 맑음
+                s += "습도 = "+  rehList.item(0).getChildNodes().item(0).getNodeValue() +"\n";
 
 
             }
