@@ -100,7 +100,7 @@ public class Bluetooth_MainActivity extends AppCompatActivity implements Adapter
                 currentdevice.setText( devicename);
                currentmac.setText(mac);
                 String msg = message.getData().getString("msg");
-                //  Log.d(TAG, msg);
+                //Log.d(TAG, msg);
                 String[] datas=msg.split(",");
                 int[] tdata=new int[3];
                 int[] hdata=new int[3];
@@ -112,7 +112,7 @@ public class Bluetooth_MainActivity extends AppCompatActivity implements Adapter
                 tdata[2]=Integer.parseInt(datas[5]);
                 String[] weight=new String[3];
                 for(int i=0;i<tdata.length;i++) {
-                    Cursor cursor=MainActivity.db.rawQuery("select * from datasheet where temp=?",new String[]{Integer.toString(tdata[i])});
+                    Cursor cursor=MainActivity.db.rawQuery("select * from humidair where temp=?",new String[]{Integer.toString(tdata[i])});
                     if(cursor.moveToNext()){
                         weight[i]=Double.toString(cursor.getFloat(cursor.getColumnIndex("weight"))*hdata[i]);
                     }
@@ -126,6 +126,7 @@ public class Bluetooth_MainActivity extends AppCompatActivity implements Adapter
                         weight[1], Integer.toString(tdata[1]),
                         weight[2], Integer.toString(tdata[2]),
                         time});
+                Log.d(TAG,"입력성공");
               /*
                 Cursor cursor=db.rawQuery("select * from datasheet",null);
                 while (cursor.moveToNext()){
