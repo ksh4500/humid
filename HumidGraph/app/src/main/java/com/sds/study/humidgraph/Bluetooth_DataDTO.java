@@ -13,6 +13,7 @@ public class Bluetooth_DataDTO {
     private int temperature2;
     private int humidity3;
     private int temperature3;
+    private String regdate;
 
     public String getRegdate() {
         return regdate;
@@ -21,8 +22,6 @@ public class Bluetooth_DataDTO {
     public void setRegdate(String regdate) {
         this.regdate = regdate;
     }
-
-    private String regdate;
 
     public String getMacAddress() {
         return MacAddress;

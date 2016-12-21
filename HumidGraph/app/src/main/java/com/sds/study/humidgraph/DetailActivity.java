@@ -1,5 +1,6 @@
 package com.sds.study.humidgraph;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,9 +15,14 @@ import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DetailActivity extends AppCompatActivity {
     String TAG;
     TextView[] h,state;
+    /*yt*/
+    ArrayList<Bluetooth_DataDTO> list= new ArrayList<Bluetooth_DataDTO>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,23 +32,43 @@ public class DetailActivity extends AppCompatActivity {
         //갯수 추가를 위해서는
         //dataset에 있는 xySeries의 수와 renderer에 있는 xySeriesRender의 수가 맞아야함
 
-        //int[] data = {25,30,35,23,24,35,32,30,27,38,24};
-        final int[] data = {40,35,27,23,22,20};
 
-        h=new TextView[data.length];
-        state=new TextView[data.length];
+        final int[] data = new int[list.size()];
+/*yt시작*/
 
-        for(int i=1;i<data.length;i++) {
-            h[i] = (TextView) findViewById(getResources().getIdentifier("h"+i,"id",this.getPackageName()));
-            state[i] = (TextView) findViewById(getResources().getIdentifier("state"+i,"id",this.getPackageName()));
-           /* TextView h2 = (TextView) findViewById(R.id.h2);
-            TextView h3 = (TextView) findViewById(R.id.h3);
-            TextView h4 = (TextView) findViewById(R.id.h4);
-            TextView h5 = (TextView) findViewById(R.id.h5);
-            TextView h6 = (TextView) findViewById(R.id.h6);
-            TextView h7 = (TextView) findViewById(R.id.h7);*/
-            h[i].setText(Integer.toString(data[i-1]));
+        Cursor cursor=MainActivity.db.rawQuery("select * from datasheet",null);
 
+         /*기존 arraylist 모두 삭제*/
+        list.removeAll(list);
+
+        while (cursor.moveToNext()){
+            /*int i=0;*/
+            int hum1=cursor.getInt(cursor.getColumnIndex("humidity1"));
+            String time=cursor.getString(cursor.getColumnIndex("regdate"));
+
+            Bluetooth_DataDTO dto=new Bluetooth_DataDTO();
+
+            dto.setHumidity1(hum1);
+            dto.setRegdate(time);
+            list.add(dto);
+
+            /*data[i]=hum1;
+            timeArr[i]=time;
+            i++;*/
+        }
+
+        for(int i=0;i<list.size();i++){
+            Bluetooth_DataDTO dto=list.get(i);
+
+            data[i]=dto.getHumidity1();
+
+        }
+
+
+        /*yt끝*/
+
+
+/*
             if(data[i-1]>=40){
                 state[i].setText("많이 젖음");
             }else if(data[i-1]>=25&&data[i-1]<40){
@@ -52,30 +78,23 @@ public class DetailActivity extends AppCompatActivity {
             }else if(data[i-1]>=0&&data[i-1]<20){
                 state[i].setText("완전 건조");
 
-                /*yt건조완료 알림*/
+                *//*yt건조완료 알림*//*
                 Intent intent=new Intent(this,NotificationService.class);
                 startService(intent);
-                /*yt환풍기 작동 정지(추가작성하기)*/
+                *//*yt환풍기 작동 정지(추가작성하기) 안함*//*
 
-            }
-        }
+            }*/
 
 
-          /*  h[i].setText(Integer.toString(data[0]));
-            h2.setText(Integer.toString(data[1]));
-            h3.setText(Integer.toString(data[2]));
-            h4.setText(Integer.toString(data[3]));
-            h5.setText(Integer.toString(data[4]));
-            h6.setText(Integer.toString(data[5]));
-            h7.setText(Integer.toString(data[6]));*/
+
+
 
 
         //그래프 생성
-        final GraphicalView chart = ChartFactory.getLineChartView(this, getDataset(data), getRenderer());
+        final GraphicalView chart = ChartFactory.getLineChartView(this, getDataset(list), getRenderer());
         //레이아웃에 추가
         LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
         layout.addView(chart);
-
     }
 
     public DetailActivity() {
@@ -112,7 +131,7 @@ public class DetailActivity extends AppCompatActivity {
         renderer.setLabelsColor(Color.CYAN);    //x,y축 글자색
 
         //x,y축 표시 간격 ( 각 축의 범위에 따라 나눌 수 있는 최소치가 제한 됨 )
-        renderer.setXLabels(5);
+        renderer.setXLabels(10);
         renderer.setYLabels(5);
 
         //x축 최대 최소(화면에 보여질)
@@ -162,15 +181,13 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     //데이터들
-    private XYMultipleSeriesDataset getDataset( int[] data ) {
-
+    private XYMultipleSeriesDataset getDataset( List list) {
 
         XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
 
-
         XYSeries series = new XYSeries("습도 변화량");
-        for (int i = 0; i < data.length; i++ ) {
-            series.add(i/12, data[i] );
+        for (int i = 0; i < list.size(); i++ ) {
+            series.add(i, ((Bluetooth_DataDTO)list.get(i)).getHumidity1());
         }
 
         /*

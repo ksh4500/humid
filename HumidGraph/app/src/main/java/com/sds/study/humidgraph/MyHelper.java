@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 import jxl.Sheet;
 import jxl.Workbook;
@@ -23,6 +26,7 @@ import jxl.read.biff.WorkbookParser;
 public class MyHelper extends SQLiteOpenHelper {
     String TAG;
     Context context;
+
     public MyHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
         this.context=context;
@@ -80,11 +84,34 @@ public class MyHelper extends SQLiteOpenHelper {
             }
             Log.d(TAG,"인서트 문 수행 완료");
             Log.d(TAG,"인서트 숫자"+count);
+
+            /*임시 코드 시작*/
+
+            int[] datas = {40,35,27,23,22,20,15,12,5,0};
+            String time[]=new String[10];
+            for(int i=0;i<time.length;i++){//1분 단위
+                time[i]="2016/12/21 15:5"+i+":00";
+            }
+
+            String time2 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date(System.currentTimeMillis()));
+            Log.d("String time=",""+time2);
+
+            for(int i=0;i<datas.length;i++) {
+                sql.setLength(0);
+                sql.append("insert into datasheet(humidity1,regdate) ");
+                sql.append("values(?,?)");
+
+                db.execSQL(sql.toString(), new String[]{
+                        Integer.toString(datas[i]), time[i]
+                });
+            }
+             /*임시 코드 끝*/
         }catch (Exception e){
             e.printStackTrace();
         }
 
     }
+
     //데이터 베이스 파일이 이미 있고, 버전 숫자가 틀린 경우 개발자가 무언가를 db에 변경하겠다는 의도로 아래의 메서드 호출
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
