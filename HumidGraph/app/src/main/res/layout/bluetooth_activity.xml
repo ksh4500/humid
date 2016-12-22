@@ -17,16 +17,20 @@
             android:id="@+id/currentdevice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="device명"
-            android:textSize="30sp" />
+            android:hint="DEVICE NAME     "
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#627bdb"/>
 
         <TextView
             android:id="@+id/currentmac"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Mac Address"
+            android:hint="MAC ADDRESS"
             android:textAlignment="center"
-            android:textSize="25sp" />
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#627bdb"/>
 
     </LinearLayout>
 
@@ -45,11 +49,12 @@
 
         <Button
             android:id="@+id/bt_scan"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="btnClick"
             android:layout_gravity="center"
-            android:text="Device 검색" />
+            android:text="Device Serch"
+            android:background="#627bdb"/>
 
 
     </LinearLayout>
