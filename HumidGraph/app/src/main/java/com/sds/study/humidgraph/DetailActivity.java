@@ -21,8 +21,11 @@ import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
     String TAG;
-
+    double cgar;
+    double start;
+    double end;
     ListView listView;
+    TextView txt_predict;
     ChartListAdapter chartListAdapter;
     ArrayList<Bluetooth_DataDTO> list= new ArrayList<Bluetooth_DataDTO>();
     ArrayList<ChartDTO> chartList=new ArrayList<ChartDTO>();
@@ -31,6 +34,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         listView=(ListView)findViewById(R.id.listView);
+        txt_predict=(TextView)findViewById(R.id.txt_predict);
         //갯수 추가를 위해서는
         //dataset에 있는 xySeries의 수와 renderer에 있는 xySeriesRender의 수가 맞아야함
 /*yt시작*/
@@ -45,12 +49,19 @@ public class DetailActivity extends AppCompatActivity {
             dto.setHumidity1(hum1);
             dto.setRegdate(time);
             list.add(dto);
+
         }
+
         for(int i=0;i<list.size();i++){
             Bluetooth_DataDTO dto=list.get(i);
             ChartDTO chartDTO=new ChartDTO();
             chartDTO.setHumidity(dto.getHumidity1());
             chartDTO.setProgressTime(dto.getRegdate());
+            if(i==0){
+                start=dto.getHumidity1();
+            }else if(i==list.size()-1){
+                end=dto.getHumidity1();
+            }
             if(dto.getHumidity1()>=40){
                 chartDTO.setEtc("많이 젖음");
             }else if(dto.getHumidity1()>=25&&dto.getHumidity1()<40){
@@ -64,7 +75,9 @@ public class DetailActivity extends AppCompatActivity {
             }
             chartList.add(chartDTO);
         }
-
+        cgar=Math.pow(1/list.size()-1,(end/start))-1;
+        double remainTime=(int)(Math.log(2)/Math.log(start));
+        txt_predict.setText(remainTime+"시간");
         /*yt끝*/
         /*
             if(data[i-1]>=40){
@@ -111,14 +124,14 @@ public class DetailActivity extends AppCompatActivity {
 
         //x,y축 표시 간격 ( 각 축의 범위에 따라 나눌 수 있는 최소치가 제한 됨 )
         renderer.setXLabels(10);
-        renderer.setYLabels(5);
+        renderer.setYLabels(1);
 
         //x축 최대 최소(화면에 보여질)
         renderer.setXAxisMin(0);
-        renderer.setXAxisMax(10);
+        renderer.setXAxisMax(20);
         //y축 최대 최소(화면에 보여질)
-        renderer.setYAxisMin(10);
-        renderer.setYAxisMax(60);
+        renderer.setYAxisMin(0);
+        renderer.setYAxisMax(40);
 
         //클릭 가능 여부
         renderer.setClickEnabled(true);
