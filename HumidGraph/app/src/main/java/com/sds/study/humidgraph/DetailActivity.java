@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TAG=getClass().getName();
         setContentView(R.layout.activity_detail);
         listView=(ListView)findViewById(R.id.listView);
         txt_predict=(TextView)findViewById(R.id.txt_predict);
@@ -66,17 +68,19 @@ public class DetailActivity extends AppCompatActivity {
                 chartDTO.setEtc("많이 젖음");
             }else if(dto.getHumidity1()>=25&&dto.getHumidity1()<40){
                 chartDTO.setEtc("조금 젖음");
-            }else if(dto.getHumidity1()>=20&&dto.getHumidity1()<25){
+            }else if(dto.getHumidity1()>=10&&dto.getHumidity1()<25){
                 chartDTO.setEtc("조금 건조");
-            }else if(dto.getHumidity1()>=0&&dto.getHumidity1()<20) {
+            }else if(dto.getHumidity1()>=0&&dto.getHumidity1()<10) {
                 chartDTO.setEtc("완전 건조");
                 Intent intent=new Intent(this,NotificationService.class);
                 startService(intent);
             }
             chartList.add(chartDTO);
         }
-        cgar=Math.pow(1/list.size()-1,(end/start))-1;
-        double remainTime=(int)(Math.log(2)/Math.log(start));
+        Log.d(TAG,"end"+end+"start"+start);
+        cgar=Math.pow((end/start),1.0/(list.size()-1));
+        Log.d(TAG,""+cgar);
+        double remainTime=(int)(Math.log(10/end)/Math.log(cgar));
         txt_predict.setText(remainTime+"시간");
         /*yt끝*/
         /*

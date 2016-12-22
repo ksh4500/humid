@@ -87,7 +87,7 @@ public class MyHelper extends SQLiteOpenHelper {
 
             /*임시 코드 시작*/
 
-            int[] datas = {40,35,27,23,22,20,15,12,5,0};
+            int[] datas = {40,35,27,23,22,20,18,17,16,13};
             String time[]=new String[10];
             for(int i=0;i<time.length;i++){//1분 단위
                 time[i]="2016/12/21 15:5"+i+":00";
