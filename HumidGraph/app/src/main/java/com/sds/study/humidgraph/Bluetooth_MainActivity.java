@@ -115,7 +115,7 @@ public class Bluetooth_MainActivity extends AppCompatActivity implements Adapter
                 for(int i=0;i<tdata.length;i++) {
                     Cursor cursor=MainActivity.db.rawQuery("select * from humidair where temp=?",new String[]{Integer.toString(tdata[i])});
                     if(cursor.moveToNext()){
-                        weight[i]=Double.toString(cursor.getFloat(cursor.getColumnIndex("weight"))*hdata[i]);//상대습도->절대습도
+                        weight[i]=Double.toString(cursor.getFloat(cursor.getColumnIndex("weight"))*hdata[i]*10);//상대습도->절대습도
                     }
                 }
                 String time = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date(System.currentTimeMillis()));
