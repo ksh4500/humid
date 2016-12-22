@@ -47,12 +47,12 @@ public class MyHelper extends SQLiteOpenHelper {
         sql.setLength(0);
         sql.append("create table datasheet(");
         sql.append("MacAddress varchar(50),");
-        sql.append("humidity1 real,");
-        sql.append("temperature1 integer,");
-        sql.append("humidity2 real,");
-        sql.append("temperature2 integer,");
-        sql.append("humidity3 real,");
-        sql.append("temperature3 integer,");
+        sql.append("humidity1 real default 0,");
+        sql.append("temperature1 integer default 0,");
+        sql.append("humidity2 real default 0,");
+        sql.append("temperature2 integer default 0,");
+        sql.append("humidity3 real default 0,");
+        sql.append("temperature3 integer default 0,");
         sql.append("regdate varchar(20)");
         sql.append(");");
         sqLiteDatabase.execSQL(sql.toString());
