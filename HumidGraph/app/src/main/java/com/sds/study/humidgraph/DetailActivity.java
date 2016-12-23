@@ -158,7 +158,7 @@ public class DetailActivity extends AppCompatActivity {
     public void getList(){
         Cursor cursor=MainActivity.db.rawQuery("select * from datasheet",null);
          /*기존 arraylist 모두 삭제*/
-        list.removeAll(list);
+        list.clear();
         while (cursor.moveToNext()){
             /*int i=0;*/
             double hum1=cursor.getDouble(cursor.getColumnIndex("humidity1"));
@@ -168,7 +168,7 @@ public class DetailActivity extends AppCompatActivity {
             dto.setRegdate(time);
             list.add(dto);
         }
-
+        chartList.clear();
         for(int i=list.size()-1;i>=0;i--){
             Bluetooth_DataDTO dto=list.get(i);
             ChartDTO chartDTO=new ChartDTO();
@@ -193,16 +193,14 @@ public class DetailActivity extends AppCompatActivity {
             chartList.add(chartDTO);
         }
 
-        double rate=Math.pow(end/start,1.0/(list.size()-1.0));
+        double rate=Math.pow(end/start,1.0/(list.size()-1.0))-1;
         Log.d(TAG,"end"+end+"start"+start+"rate"+rate);
-        int remainTime=0;
-        while(true){
-            Log.d(TAG,""+remainTime++);
-            if((end*=rate)<4||remainTime>100){
-                break;
-            }
-
-        };
-        txt_predict.setText((remainTime-1)+"시간");
+        double remainTime=0;
+        if(rate<0.0) {
+            remainTime = (Math.log(4.0 / end) / Math.log(1 + rate));
+        }else{
+            remainTime=1000;
+        }
+        txt_predict.setText((remainTime)+"시간");
     }
 }
