@@ -7,9 +7,12 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
@@ -35,6 +38,7 @@ public class DetailActivity extends AppCompatActivity {
     static Handler handler;
     ArrayList<Bluetooth_DataDTO> list= new ArrayList<Bluetooth_DataDTO>();
     ArrayList<ChartDTO> chartList=new ArrayList<ChartDTO>();
+    Button renew;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,13 +46,32 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         listView=(ListView)findViewById(R.id.listView);
         txt_predict=(TextView)findViewById(R.id.txt_predict);
+        renew=(Button)findViewById(R.id.renew);
+
+
 
         getList();
+
         //그래프 생성
-        chart = ChartFactory.getLineChartView(this, getDataset(list), getRenderer());
+      chart = ChartFactory.getLineChartView(this, getDataset(list), getRenderer());
         //레이아웃에 추가
-        LinearLayout layout= (LinearLayout) findViewById(R.id.chart);
+        final LinearLayout layout= (LinearLayout) findViewById(R.id.chart);
         layout.addView(chart);
+        renew.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+
+                //chart = ChartFactory.getLineChartView(getApplicationContext(), getDataset(list), getRenderer());
+
+                // ((LinearLayout)findViewById(R.id.chart)).removeView(chart);
+                // ((LinearLayout)findViewById(R.id.chart)).addView(chart);
+               // layout.removeView(chart);
+                //layout.addView(chart);
+                Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
+                startActivity(intent);
+                Toast.makeText(DetailActivity.this, "그래프 갱신", Toast.LENGTH_SHORT).show();
+            }
+        });
         chartListAdapter=new ChartListAdapter(this);
         listView.setAdapter(chartListAdapter);
         handler=new Handler(){
@@ -57,12 +80,15 @@ public class DetailActivity extends AppCompatActivity {
                 render();
             }
         };
+
     }
     public void render(){
         getList();
         chartListAdapter.notifyDataSetChanged();
         chart=ChartFactory.getLineChartView(this,getDataset(list),getRenderer());
+       // chart.repaint();
         ((LinearLayout)findViewById(R.id.chart)).addView(chart);
+        //((LinearLayout)findViewById(R.id.chart)).removeView(chart);
     }
     //그래프 설정 모음
     // http://www.programkr.com/blog/MQDN0ADMwYT3.html ( 그래프 설정 속성 한글로 써져있는 사이트 )
@@ -82,10 +108,10 @@ public class DetailActivity extends AppCompatActivity {
         renderer.setLabelsTextSize(30);             //x,y축 수치
         renderer.setLegendTextSize(15);             //Series 구별 글씨 크기
         renderer.setPointSize(5f);
-        renderer.setMargins(new int[] { 20, 20, 50, 50 }); //상 좌 하 우 ( '하' 의 경우 setFitLegend(true)일 때에만 가능 )
+        renderer.setMargins(new int[] { 20, 40, 50, 50 }); //상 좌 하 우 ( '하' 의 경우 setFitLegend(true)일 때에만 가능 )
         //색
         renderer.setAxesColor(Color.RED);       //x,y축 선 색
-        renderer.setLabelsColor(Color.CYAN);    //x,y축 글자색
+        renderer.setLabelsColor(Color.GRAY);    //x,y축 글자색
 
         //x,y축 표시 간격 ( 각 축의 범위에 따라 나눌 수 있는 최소치가 제한 됨 )
         renderer.setXLabels(10);
@@ -93,7 +119,7 @@ public class DetailActivity extends AppCompatActivity {
 
         //x축 최대 최소(화면에 보여질)
         renderer.setXAxisMin(0);
-        renderer.setXAxisMax(20);
+        renderer.setXAxisMax(100);
         //y축 최대 최소(화면에 보여질)
         renderer.setYAxisMin(0);
         renderer.setYAxisMax(40);
@@ -109,7 +135,7 @@ public class DetailActivity extends AppCompatActivity {
         //지정된 크기에 맞게 그래프를 키움
         renderer.setFitLegend(true);
         //간격에 격자 보이기
-        renderer.setShowGrid(true);
+        renderer.setShowGrid(false);
     }
 
     //선 그리기
@@ -185,8 +211,8 @@ public class DetailActivity extends AppCompatActivity {
                 chartDTO.setEtc("조금 건조");
             }else if(dto.getHumidity1()>=0&&dto.getHumidity1()<4) {
                 chartDTO.setEtc("완전 건조");
-                Intent intent=new Intent(this,NotificationService.class);
-                startService(intent);
+                //Intent intent=new Intent(this,NotificationService.class);
+                //startService(intent);
             }
             chartDTO.setHumidity(dto.getHumidity1());
             chartDTO.setProgressTime(dto.getRegdate());

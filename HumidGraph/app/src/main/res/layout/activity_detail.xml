@@ -6,8 +6,13 @@
     android:orientation="vertical"
     tools:context="com.sds.study.humidgraph.DetailActivity">
 
-
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="갱신"
+    android:id="@+id/renew"/>
     <LinearLayout
+        android:padding="10dp"
         android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -24,7 +29,7 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="#FFDD"
+            android:background="#225bbd"
             android:stretchColumns="*"
             android:layout_weight="1">
 
