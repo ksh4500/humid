@@ -59,6 +59,9 @@ public class Bluetooth_DataThread extends Thread {
             bundle.putString("msg", msg);
             message.setData(bundle);
             bluetooth_mainActivity.handler.sendMessage(message);
+            if(DetailActivity.handler!=null){
+                    DetailActivity.handler.sendEmptyMessage(0);
+            }
 
         } catch (IOException e) {
             e.printStackTrace();

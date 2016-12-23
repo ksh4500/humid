@@ -11,8 +11,7 @@
         android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
-
+        android:layout_weight="4"
         android:orientation="horizontal">
 
     </LinearLayout>
@@ -27,7 +26,7 @@
             android:layout_height="0dp"
             android:background="#FFDD"
             android:stretchColumns="*"
-            android:layout_weight="1.5">
+            android:layout_weight="1">
 
             <View
                 android:layout_width="match_parent"
@@ -70,12 +69,7 @@
                     />
 
             </TableRow>
-            <ListView
-                android:id="@+id/listView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-            </ListView>
+
             <!--<TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -385,7 +379,13 @@
 
         </TableLayout>
     <!--</ScrollView>-->
-
+    <ListView
+        android:layout_weight="4"
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        >
+    </ListView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
